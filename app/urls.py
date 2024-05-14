@@ -16,13 +16,26 @@ Including another URLconf
 """
 from django.urls import path
 from . views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('',index),
+    path('signin/',signin),
     path('registration/',create_user),
     path('courses/',courses),
+    path("delete/<int:pk>",delete_course,name='delete'),
+    path("delete_student/<int:pk>/",delete_student, name='delete_student'),
+    path("updatecourse/<int:uid>/",updatecourse, name="updatecourse"),
     path('dashboard/',dashboard),
-    path('profile/',profile),
+    path("profile/<int:pk>/",profile ,name='profile'),
     path('signup/',signup),
-    path('viewstudents/',viewstudents)
-]
+    path('viewstudents/',viewstudents),
+    path('course_registration/',course_registration),
+    path('add_student/', add_student),
+    path('update_course/',update_course),
+    path('update_student/',update_student),
+    path("search/",search,name='search'),
+    path("updatestudent/<int:uid>/",updatestudent, name="updatestudent"),
+
+]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
