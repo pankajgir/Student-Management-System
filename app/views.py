@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 from django.db.models import Q
 
+
 # Create your views here.
 def courses(request):
     return render(request,'courses.html')
@@ -110,7 +111,7 @@ def delete_student(request,pk):
 def updatestudent(request,uid):
     course_obj = course.objects.all()
     update_obj=student.objects.get(id=uid)
-    return render(request, "update-student.html", {"course_obj":course_obj, "update_obj":update_obj})
+    return render(request, "update_student.html", {"course_obj":course_obj, "update_obj":update_obj})
 
 def update_student(request):
     if request.method =="POST":
@@ -125,7 +126,7 @@ def update_student(request):
         course_id = request.POST.get("courses")
         new_course = course.objects.get(id=course_id)
         student.objects.filter(id=uid).update(name=name, email=email, mobile_no=mobile_no, college=college
-                                             ,degree=degree, address=address, image=image, courses=new_course)
+                                             ,degree=degree, address=address, image=image, course=new_course)
         messages.success(request,"student Update Sucessfully")
         return redirect('/viewstudents/')
 def search(request):

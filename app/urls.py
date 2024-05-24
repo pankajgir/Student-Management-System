@@ -18,6 +18,7 @@ from django.urls import path
 from . views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from.api import *
 
 urlpatterns = [
     path('',index),
@@ -37,5 +38,17 @@ urlpatterns = [
     path('update_student/',update_student),
     path("search/",search,name='search'),
     path("updatestudent/<int:uid>/",updatestudent, name="updatestudent"),
+
+    # This is Api Url
+    path("api/user/",Userapi.as_view()),
+    path("api/updateuserapi/<int:pk>/",updateuserapi.as_view()),
+    path("api/deleteuserapi/<int:pk>/",deleteuserapi.as_view()),
+    path("api/course/",courseapi.as_view()),
+    path("api/updatecourseapi/<int:pk>/",updatecourseapi.as_view()),
+    path("api/deletecourseapi/<int:pk>/",deletecourseapi.as_view()),
+     path("api/student/",studentapi.as_view()),
+    path("api/updatestudentapi/<int:pk>/",updatestudentapi.as_view()),
+    path("api/deletestudentapi/<int:pk>/",deletestudentapi.as_view()),
+
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
